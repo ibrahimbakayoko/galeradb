@@ -1,0 +1,30 @@
+replicaCount: 3
+
+auth:
+  rootPassword: rootpassword
+  database: taskmanager
+  username: appuser
+  password: appuserpass
+
+persistence:
+  enabled: true
+  size: 5Gi
+
+galera:
+  bootstrap:
+    forceSafeToBootstrap: true
+    bootstrapFromNode: "my-galera-mariadb-galera-0"  # Utilise un nœud comme point de démarrage
+
+resources:
+  requests:
+    memory: 1Gi
+    cpu: 500m
+  limits:
+    memory: 2Gi
+    cpu: 1000m
+
+service:
+  type: ClusterIP
+  name: my-galera-mariadb-galera
+  ports:
+    mysql: 3306
